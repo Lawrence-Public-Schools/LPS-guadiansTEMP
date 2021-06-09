@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<!-- start right frame -->
+
+<head>
+    <title>GuardiansTEMP</title>
+    ~[wc:UI_js_includes]
+    ~[wc:commonscripts]
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="/images/css/print.css" rel="stylesheet" media="print">
+    <link rel="stylesheet" type="text/css" href="/images/boxing.css">
+    <style>
+    .clickable {
+        cursor: pointer;
+    }
+    </style>
+    <script type="text/javascript">
+    var selectedAdapter = "~[displaypref:mappingadapter.selected]";
+    var mapKey = "~[x:selectedvalidationmappingadapterkey]";
+    var validateSucceeded = false;
+
+    function load() {
+        prepPage();
+        // If they don't select any of the visible options for ethnicity, choose "-1" for them ...
+        var defaultEthnicity = document.getElementById("defaultEthnicity");
+        if(defaultEthnicity) {
+            defaultEthnicity.value = "-1";
+        }
+    }
+    // Only let jQuery call validateInput once if it succeeds
+    // Multiple calls that return success(true) result in the unit number field being appended to the street address multiple times
+    function validateInputOnceOnly() {
+        if(!validateSucceeded) {
+            validateSucceeded = validateInput();
+        }
+        return validateSucceeded;
+    }
+    </script>
+    ~[x:renderboundaryobject]
+    ~[get_js_texts:psx.js.admin_validation.validationCommon.]
+    <script language="JavaScript" src="/admin/validation/validationCommon.js"></script>
+    <script language="JavaScript" src="/scripts/contact.js"></script>
+</head>
+
+<body>
+    ~[wc:admin_header_frame_css]
+    <!-- breadcrumb start -->
+    <a href="/admin/home.html" target="_top">
+        ~[text:psx.html.admin_students.generaldemographics.start_page]
+    </a> &gt; <a href="home.html?selectstudent=nosearch" target="_top">
+        ~[text:psx.html.admin_students.emergency.student_selection]
+    </a> &gt;GuardiansTEMP
+    <!-- breadcrumb end -->
+    ~[wc:admin_navigation_frame_css]
+    ~[wc:title_student_begin_css]
+    <h1>GuardiansTEMP</h1>
+    ~[wc:title_student_end_css]
+    <form action="/admin/changesrecorded.white.html" method="POST" onSubmit="return validateInputOnceOnly()">
+        <!-- Start of shaded content table and bounding box -->
+        <div class="box-round">
+            <table border="0" cellspacing="0" cellpadding="4" class="linkDescList">
+                <colgroup>
+                    <col style="width:20%">
+                        <col>
+                </colgroup>
+                <tr class="headerrow hidden">
+                    <td colspan="2" class="bold" style="text-align: center;">GuardiansTEMP</td>
+                </tr>
+                <tr style="vertical-align: bottom;">
+                    <td class="bold">Lives with</td>
+                    <td> Guardian 1:
+                        <input name="[01]guardian_lives_with" value="1" type="radio"> Guardian 2:
+                        <input name="[01]guardian_lives_with" value="2" type="radio"> </td>
+                </tr>
+                <tr style="vertical-align: top;">
+                    <td colspan="2" class="bold" align="center">Guardian 1's Information </td>
+                </tr>
+                <tr>
+                    <td class="bold">Relationship</td>
+                    <td>
+                        <select name="[01]guardian_relationship" id="guardian_relationship">
+                            <option value=" "></option>
+                            <option value="Mother">Mother</option>
+                            <option value="Father">Father</option>
+                            <option value="Grandmother">Grandmother</option>
+                            <option value="Grandfather">Grandfather</option>
+                            <option value="Sibling">Sibling</option>
+                            <option value="Step-Parent">Step-Parent</option>
+                            <option value="Foster-Parent">Foster-Parent</option>
+                            <option value="Aunt">Aunt</option>
+                            <option value="Uncle">Uncle</option>
+                            <option value="Cousin">Cousin</option>
+                            <option value="Social Worker">Social Worker</option>
+                            <option value="Legal Guardian">Legal Guardian</option>
+                            <option value="Self">Self</option>
+                            <option value="In-Law">In-Law</option>
+                            <option value="Husband">Husband</option>
+                            <option value="Wife">Wife</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold">Last Name, First Name</td>
+                    <td>
+                        <select name="[01]guardian_title" id="guardian_title">
+                            <option value=""></option>
+                            <option value="Ms">Ms</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Dr">Dr</option>
+                        </select>
+                        <input name="[01]guardian_LN" id="guardian_LN" value="" type="text">
+                        <input name="[01]guardian_FN" id="guardian_FN" value="" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Address</td>
+                    <td>
+                        <input size="30" name="[01]guardianstreet" id="guardianstreet" value="" type="text"> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="[01]guardiancity" id="guardiancity" size="15" value="" type="text">
+                        <input maxlength="2" name="[01]guardianstate" id="guardianstate" size="2" value="" type="text">
+                        <input name="[01]guardianzip" value="" id="guardianzip" size="10" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Home Phone </td>
+                    <td>
+                        <input name="[01]guardianhomephone" value="" id="guardianhomephone" type="text" onChange="ValidatePhoneNumber('~(JSFieldParam;[01]guardianhomephone)');"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Cell Phone </td>
+                    <td>
+                        <input name="[01]guardian_cell_phone" value="" id="guardian_cell_phone" type="text" onChange="ValidatePhoneNumber('~(JSFieldParam;[01]guardian_cell_phone)');"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Email</td>
+                    <td>
+                        <input name="[01]guardianemail" value="" size="30" id="guardianemail" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Employer</td>
+                    <td>
+                        <input size="30" name="[01]guardian_employer" value="" id="guardian_employer" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Occupation</td>
+                    <td>
+                        <input size="30" name="[01]guardian_occupation" id="guardian_occupation" value="" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Day Phone</td>
+                    <td class="bold">
+                        <input name="[01]guardiandayphone" value="" type="text" id="guardiandayphone" onChange="ValidatePhoneNumber('~(JSFieldParam;[01]guardiandayphone)');"> Ext.
+                        <input size="5" name="[01]guardiandayphoneext" value="" type="text" id="guardiandayphoneext"> </td>
+                </tr>
+                <tr style="vertical-align: top;">
+                    <td colspan="2" class="bold" align="center">Guardian 2's Information </td>
+                </tr>
+                <tr>
+                    <td class="bold">Relationship</td>
+                    <td>
+                        <select name="[01]guardian2_relationship" id="guardian2_relationship">
+                            <option value=" "></option>
+                            <option value="Mother">Mother</option>
+                            <option value="Father">Father</option>
+                            <option value="Grandmother">Grandmother</option>
+                            <option value="Grandfather">Grandfather</option>
+                            <option value="Sibling">Sibling</option>
+                            <option value="Step-Parent">Step-Parent</option>
+                            <option value="Foster-Parent">Foster-Parent</option>
+                            <option value="Aunt">Aunt</option>
+                            <option value="Uncle">Uncle</option>
+                            <option value="Cousin">Cousin</option>
+                            <option value="Social Worker">Social Worker</option>
+                            <option value="Legal Guardian">Legal Guardian</option>
+                            <option value="Self">Self</option>
+                            <option value="In-Law">In-Law</option>
+                            <option value="Husband">Husband</option>
+                            <option value="Wife">Wife</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold">Last Name, First Name</td>
+                    <td>
+                        <select name="[01]guardian2_title" id="guardian2_title">
+                            <option value=""></option>
+                            <option value="Ms">Ms</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Dr">Dr</option>
+                        </select>
+                        <input name="[01]guardian2_LN" id="guardian2_LN" type="text" value="">
+                        <input name="[01]guardian2_FN" id="guardian2_FN" type="text" value=""> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Address</td>
+                    <td>
+                        <input size="30" name="[01]guardian2street" id="guardian2street" value="" type="text"> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="[01]guardian2city" value="" id="guardian2city" size="15" type="text">
+                        <input maxlength="2" name="[01]guardian2state" value="" id="guardian2state" size="2" type="text">
+                        <input name="[01]guardian2zip" value="" id="guardian2zip" size="10" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Home Phone </td>
+                    <td>
+                        <input name="[01]guardian2homephone" value="" id="guardian2homephone" type="text" onChange="ValidatePhoneNumber('~(JSFieldParam;[01]guardian2homephone)');"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Cell Phone </td>
+                    <td>
+                        <input name="[01]guardian2_cell_phone" value="" id="guardian2_cell_phone" type="text" onChange="ValidatePhoneNumber('~(JSFieldParam;[01]guardian2_cell_phone)');"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Email</td>
+                    <td>
+                        <input name="[01]guardian2email" value="" id="guardian2email" size="30" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Employer</td>
+                    <td>
+                        <input size="30" name="[01]guardian2_employer" value="" id="guardian2_employer" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Occupation</td>
+                    <td>
+                        <input size="30" name="[01]guardian2_occupation" id="[01]guardian2_occupation" value="" type="text"> </td>
+                </tr>
+                <tr>
+                    <td class="bold">Day Phone</td>
+                    <td class="bold">
+                        <input name="[01]guardian2dayphone" value="" type="text" id="guardian2dayphone" onChange="ValidatePhoneNumber('~(JSFieldParam;[01]guardian2dayphone)');"> Ext.
+                        <input size="5" name="[01]guardian2dayphoneext" value="" type="text" id="guardian2dayphoneext"> </td>
+                </tr>
+            </table>
+        </div>
+        <div class="button-row">
+            <input type="hidden" name="ac" value="prim">
+            ~[if.ModAccess]<input type="submit" id="btnSubmit" name="btnSubmit" value="~[text:psx.html.admin_students.generaldemographics.submit]" onclick="contactFunctions.checkContactNameChanges('~(frn)', event);validateInputOnceOnly();">[/if]
+        </div>
+        <!-- End of shaded content table and bounding box -->~[wc:admin_footer_frame_css] </form>
+    <!-- End of shaded content table and bounding box -->

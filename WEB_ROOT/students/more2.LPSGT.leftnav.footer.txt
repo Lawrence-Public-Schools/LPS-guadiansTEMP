@@ -1,0 +1,17 @@
+    <style>
+      a.LPSGTA:link {
+        color: red;
+      }
+      a.LPSGTA:visited {
+        color: red;
+      }
+      a.LPSGTA:hover {
+        color: red;
+      }
+      }
+    </style>
+<script type="text/javascript">
+$j(document).ready(function() {
+$j( "ul#std_information > li > a[href^='fmly_Index.html?frn=']" ).parent().after($j('<li ><a class="LPSGTA" href="LPSGT.html?frn=~(studentfrn)">GuardiansTEMP &tilde;</a></li>'));
+});
+</script>
